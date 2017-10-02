@@ -61,9 +61,6 @@
     "karma-webpack": "^1.7.0",
     "mocha": "^2.0.1",
     "pretty-bytes": "^2.0.1",
-    "react": "^0.14.0",
-    "react-addons-test-utils": "0.14.0",
-    "react-dom": "^0.14.0",
     "rimraf": "^2.4.3",
     "style-loader": "^0.12.4",
     "webpack": "^1.4.13",
@@ -77,5 +74,10 @@
     "react",
     "react-component",
     "title"
-  ]
+  ],
+  "dependencies": {
+    "prop-types": "^15.6.0",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2"
+  }
 }
