@@ -1,52 +1,54 @@
-import React from 'react'
+import { Component } from 'react'
+import { oneOfType, string, func } from 'prop-types'
 
 let titles = []
 
 function getTitle() {
-  return titles[titles.length - 1]
+    return titles[titles.length - 1]
 }
 
 function updateTitle() {
-  document.title = getTitle()
+    document.title = getTitle()
 }
 
 export function flushTitle() {
-  const title = getTitle()
-  titles = []
-  return title
+    const title = getTitle()
+    titles = []
+    return title
 }
 
-const { oneOfType, string, func } = React.PropTypes
-
-const Title = React.createClass({
-
-  propTypes: {
-    render: oneOfType([ string, func ]).isRequired
-  },
-
-  getInitialState() {
-    return {
-      index: titles.push('') - 1
+export default class Title extends Component {
+    constructor() {
+        super()
+        this.state = {
+            index: titles.push('') - 1
+        }
     }
-  },
 
-  componentWillUnmount() {
-    titles.pop()
-  },
+    static propTypes = {
+        render: oneOfType([ string, func ]).isRequired
+    }
 
-  componentDidMount: updateTitle,
+    componentWillUnmount() {
+        titles.pop()
+    }
 
-  componentDidUpdate: updateTitle,
+    componentDidMount() {
+        updateTitle()
+    }
 
-  render() {
-    const { render } = this.props
-    titles[this.state.index] = typeof render === 'function'
-      ? render(titles[this.state.index - 1] || '')
-      : render
-    return this.props.children || null
-  }
+    componentDidUpdate() {
+        updateTitle()
+    }
 
-})
+    render() {
+        const { render } = this.props
+        const { index } = this.state
 
-export default Title
+        titles[index] = typeof render === 'function'
+            ? render(titles[index - 1] || '')
+            : render
+        return this.props.children || null
+    }
 
+}
