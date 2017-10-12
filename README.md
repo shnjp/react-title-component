@@ -3,6 +3,8 @@ React Title Component
 
 Nested document title management for React.
 
+The fork differs from the fork in that it is updated to support the new versions of React (16+).
+
 ### Installation
 
 Using [npm](https://www.npmjs.com/):
