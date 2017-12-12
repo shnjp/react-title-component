@@ -2,9 +2,11 @@ import { Component } from 'react'
 import { oneOfType, string, func } from 'prop-types'
 
 let titles = []
+let counter = 0
 
 function getTitle() {
-    return titles[titles.length - 1]
+    const item = titles.slice(-1).pop()
+    return item && item.title
 }
 
 function updateTitle() {
@@ -20,8 +22,15 @@ export function flushTitle() {
 export default class Title extends Component {
     constructor() {
         super()
+
+        const key = counter++
+
+        titles.push({
+            key: key
+        })
+
         this.state = {
-            index: titles.push('') - 1
+            key: key
         }
     }
 
@@ -30,7 +39,16 @@ export default class Title extends Component {
     }
 
     componentWillUnmount() {
-        titles.pop()
+        const { key } = this.state
+        const index = titles.findIndex((title) => {
+            return title.key === key
+        })
+
+        if (index !== -1) {
+            titles.splice(index, 1)
+        }
+
+        updateTitle()
     }
 
     componentDidMount() {
@@ -43,11 +61,20 @@ export default class Title extends Component {
 
     render() {
         const { render } = this.props
-        const { index } = this.state
+        const { key } = this.state
 
-        titles[index] = typeof render === 'function'
-            ? render(titles[index - 1] || '')
+        const index = titles.findIndex((title) => {
+            return title.key === key
+        })
+
+        if (index !== -1) {
+            const title = titles[index]
+            const previous = titles[index - 1]
+            title.title = typeof render === 'function'
+            ? render(previous ? previous.title : '')
             : render
+        }
+
         return this.props.children || null
     }
 
