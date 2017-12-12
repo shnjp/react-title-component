@@ -5,8 +5,12 @@ let titles = []
 let counter = 0
 
 function getTitle() {
-    const item = titles.slice(-1).pop()
-    return item && item.title
+    return titles.reduce((current, title) => {
+        const render = title.render
+        return typeof render === 'function'
+        ? render(current || '')
+        : render
+    }, '')
 }
 
 function updateTitle() {
@@ -69,10 +73,7 @@ export default class Title extends Component {
 
         if (index !== -1) {
             const title = titles[index]
-            const previous = titles[index - 1]
-            title.title = typeof render === 'function'
-            ? render(previous ? previous.title : '')
-            : render
+            title.render = render
         }
 
         return this.props.children || null
