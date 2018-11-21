@@ -38,10 +38,6 @@ export default class Title extends Component {
         }
     }
 
-    static propTypes = {
-        render: oneOfType([ string, func ]).isRequired
-    }
-
     componentWillUnmount() {
         const { key } = this.state
         const index = titles.findIndex((title) => {
@@ -78,5 +74,7 @@ export default class Title extends Component {
 
         return this.props.children || null
     }
-
+}
+Title.propTypes = {
+    render: oneOfType([ string, func ]).isRequired
 }

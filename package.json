@@ -1,6 +1,6 @@
 {
-  "name": "@testlio/react-title-component",
-  "version": "1.0.7",
+  "name": "@shnjp/react-title-component",
+  "version": "1.0.8",
   "description": "Nested document title management for React.js",
   "files": [
     "*.md",
@@ -11,7 +11,7 @@
     "npm-scripts",
     "umd"
   ],
-  "main": "lib/Title",
+  "main": "modules/Title",
   "jsnext:main": "es6/Title",
   "repository": {
     "type": "git",
