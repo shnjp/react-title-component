@@ -1,6 +1,6 @@
 {
   "name": "@shnjp/react-title-component",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Nested document title management for React.js",
   "files": [
     "*.md",
@@ -75,8 +75,7 @@
     "react-component",
     "title"
   ],
-  "dependencies": {
-    "prop-types": "^15.6.0",
+  "peerDependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
   }
